@@ -2,7 +2,7 @@ const LecturerCardSkeleton = () => {
   return (
     <div className="flex h-auto w-[300px] flex-col rounded-3xl border bg-white p-4 shadow-sm">
       <div className="flex flex-row items-center justify-between gap-4">
-        <div className="h-[100px] w-[100px] animate-pulse rounded-full bg-gray-200 border-2" />
+        <div className="h-[100px] w-[100px] animate-pulse rounded-full border-2 bg-gray-200" />
         <div className="h-[50px] w-[120px] animate-pulse rounded-lg bg-gray-200" />
       </div>
       <hr className="my-4 border-t border-dashed border-gray-400" />

@@ -73,7 +73,7 @@ export default function OurClasses() {
             alt="Vector Classes"
             width={1580}
             height={1230}
-            className="w-full h-auto"
+            className="h-auto w-full"
           />
         </div>
       </section>
@@ -96,7 +96,7 @@ export default function OurClasses() {
           alt="Vector Bottom"
           width={1580}
           height={1230}
-          className="w-full h-auto"
+          className="h-auto w-full"
         />
       </div>
     </div>

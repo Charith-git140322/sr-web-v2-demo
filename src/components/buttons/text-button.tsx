@@ -26,8 +26,7 @@ export function TextButton({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`inline-flex items-center gap-2 ${fontSize} ${fontWeight} text-black transition-colors duration-300 
-        hover:text-[#C8A66B] group disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+      className={`inline-flex items-center gap-2 ${fontSize} ${fontWeight} group text-black transition-colors duration-300 hover:text-[#C8A66B] disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
     >
       {children}
       {imageSrc && (

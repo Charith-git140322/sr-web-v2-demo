@@ -1,0 +1,9 @@
+export const HOME = "/";
+export const OUR_CLASSES = "/our-classes";
+export const OUR_LECTURERS = "/our-lecturers";
+export const TERMS_CONDITIONS = "/terms-conditions";
+export const PRIVACY_POLICY = "/privacy-policy";
+export const FAQ = "/faq";
+export const ABOUT_US = "/about-us";
+export const CONTACT_US = "/contact-us";
+export const PRICING = "/pricing";

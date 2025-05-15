@@ -1,0 +1,33 @@
+export const studyReserveTheme = {
+  font: "font-roboto",
+  fSize: {
+    title: "text-title",
+    srTitle: "text-srTitle",
+    subTitle: "text-subTitle",
+    p: "text-p",
+    post: "text-post",
+    srHeader: "text-srHeader",
+    sectionTitle: "text-sectionTitle",
+    menuBar: "text-menuBar",
+    button: "text-button",
+    pMedium: "text-pMedium",
+    pSmall: "text-pSmall",
+    placeholder: "text-placeholder",
+  },
+  fColors: {
+    primaryText: "text-black",
+    white: "text-white",
+    subText: "text-subText",
+  },
+  fPadding: {
+    pad: "px4",
+    pad1: "px8",
+    pad2: "px10",
+    pad3: "px16",
+    pad4: "px24",
+    pad5: "px32",
+    pad6: "px40",
+    pad7: "px55",
+    pad8: "px64",
+  },
+};

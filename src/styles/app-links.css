@@ -1,0 +1,39 @@
+.app-links {
+  @apply mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-2 px-[16px] py-[32px] md:flex-row md:gap-4;
+}
+.app-links-heading {
+  @apply w-full text-center text-[32px] md:w-1/2 md:text-left md:text-[40px];
+}
+.app-links-buttons {
+  @apply flex w-full flex-row justify-between gap-2 md:w-1/2 md:justify-end md:gap-6;
+}
+.card-android {
+  @apply relative flex h-[255px] w-[150px] flex-col bg-[#DAE8CE] px-[8px] py-[32px] text-center transition-transform duration-300 hover:scale-105 md:h-[300px] md:w-[203px];
+}
+.card-android-title {
+  @apply mb-24 text-center text-[14px] text-black md:text-[20px];
+}
+.android-logo {
+  @apply absolute bottom-0 right-0 items-center justify-center;
+}
+.card-ios {
+  @apply relative flex h-[255px] w-[150px] flex-col items-center justify-between bg-[#202124] px-[8px] py-[32px] transition-transform duration-300 hover:scale-105 md:h-[300px] md:w-[203px];
+}
+.card-ios-logo {
+  @apply mb-4 h-[62px] w-[50px] md:h-[74px] md:w-[60px];
+}
+.card-ios-title {
+  @apply mt-10 text-center text-[14px] text-white md:text-[20px];
+}
+.card-windows {
+  @apply relative flex h-[255px] w-[150px] flex-col overflow-hidden bg-[#D4F3FE] transition-transform duration-300 hover:scale-105 md:h-[300px] md:w-[203px];
+}
+.windows-icon {
+  @apply absolute right-0 top-0 h-[67px] w-[67px] rounded-md md:h-[80px] md:w-[80px];
+}
+.card-windows-title {
+  @apply absolute inset-0 z-10 flex items-center justify-center text-center text-[14px] md:text-[20px];
+}
+.macOS-icon {
+  @apply absolute bottom-[14px] left-0 h-[67px] w-[67px] rounded-md md:h-[80px] md:w-[80px];
+}

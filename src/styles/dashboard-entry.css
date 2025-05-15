@@ -1,0 +1,45 @@
+.dashboards-entry {
+  @apply relative mt-10 flex items-center justify-center py-5;
+}
+.dashboards-entry-bg-img {
+  @apply w-full object-cover object-top;
+}
+.dashboards-entry-content {
+  @apply relative z-10 flex w-full max-w-7xl flex-col items-center justify-between gap-4 px-[16px] py-10 md:flex-row;
+}
+.teacher-dashboard-card {
+  @apply order-2 block w-full md:max-h-[196px] md:max-w-[436px];
+}
+.login-link {
+  @apply relative block overflow-hidden rounded-xl;
+}
+.dash-img {
+  @apply h-auto w-full transform object-cover transition duration-500 group-hover:scale-110;
+}
+.dash-square-arrow {
+  @apply ml-1 inline-block invert;
+}
+.teacher-dashboard-card-text {
+  @apply absolute inset-0 flex transform items-center justify-center bg-black/20;
+}
+.teacher-dashboard-card-text span {
+  @apply flex items-center gap-2 text-[18px] text-base text-white md:text-[20px] lg:text-[20px];
+}
+.dashboards-text {
+  @apply order-1 block max-w-[436px] md:order-2;
+}
+.dashboards-text div {
+  @apply order-1 flex w-full items-center justify-center text-center md:order-2;
+}
+.dashboards-text div h1 {
+  @apply text-[32px] md:text-[40px];
+}
+.student-dashboard-card {
+  @apply order-3 block w-full md:max-h-[196px] md:max-w-[436px];
+}
+.student-dashboard-card-text {
+  @apply absolute inset-0 flex transform items-center justify-center bg-black/20;
+}
+.student-dashboard-card-text span {
+  @apply flex items-center gap-2 text-[18px] text-base text-white md:text-[20px] lg:text-[20px];
+}

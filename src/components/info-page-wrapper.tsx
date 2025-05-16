@@ -10,7 +10,7 @@ export default function InfoPageWrapper({ children, title }: Props) {
     <div className="relative overflow-hidden bg-gradient-to-r from-white to-[#f5e8da] pb-20">
       <section className="relative h-[250px] w-full md:h-[300px]">
         <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-center text-[40px] font-semibold leading-tight text-gray-800 sm:text-[36px] md:text-[48px] lg:text-[64px]">
+          <h1 className="text-center text-[36px] font-semibold leading-tight text-gray-800 md:text-[48px]">
             {title}
           </h1>
         </div>

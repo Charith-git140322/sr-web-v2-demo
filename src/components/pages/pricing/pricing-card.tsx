@@ -112,9 +112,7 @@ export function EnterprisePricingCard() {
       <hr className="my-4 border-t border-solid border-gray-300" />
 
       <div className="flex items-center justify-center pt-5">
-        <FilledButton className="w-full bg-amber-400 hover:bg-amber-500">
-          Contact Us
-        </FilledButton>
+        <FilledButton className="w-full">Contact Us</FilledButton>
       </div>
     </div>
   );

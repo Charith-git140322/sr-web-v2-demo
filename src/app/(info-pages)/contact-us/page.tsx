@@ -24,13 +24,16 @@ export default function ContactUs() {
               23/3 Pubudu mawatha hospital road, Pamunuwa, <br />
               Maharagama, Sri Lanka
             </p>
-            <p className="mt-4 text-sm text-blue-600">
+            <a
+              href="mailto:support@studyreserve.com"
+              className="mt-4 text-sm text-amber-800 underline hover:text-amber-950"
+            >
               support@studyreserve.com
-            </p>
+            </a>
           </div>
           <div className="mt-4 text-right">
-            <FilledButton className="bg-yellow-400 font-semibold text-black hover:bg-yellow-500">
-              Contact now!
+            <FilledButton>
+              <a href="mailto:support@studyreserve.com">Contact now!</a>
             </FilledButton>
           </div>
         </div>

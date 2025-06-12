@@ -1,56 +1,47 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { OUR_CLASSES, OUR_LECTURERS } from "./routes";
+import { getAllTags } from "@/services/service";
+import { TTag } from "@/lib/types";
 
-export const classes = [
-  {
-    title: "VIEW ALL CLASSES",
-    href: OUR_CLASSES,
-    description: "View all classes available on StudyReserve.",
-  },
-  {
-    title: "GCE Ordinary Level",
-    href: "",
-    description: "Classes related to grade 10 & grade 11 in Sri Lanka.",
-    disabled: true,
-  },
-  {
-    title: "GCE Advanced Level",
-    href: "",
-    description: "Classes related to grade 12 & grade 13 in Sri Lanka.",
-    disabled: true,
-  },
-  {
-    title: "Higher Education",
-    href: "",
-    description: "Classes related to undergraduate and postgraduate studies.",
-    disabled: true,
-  },
-];
+export const useTagLinks = () => {
+  const [classes, setClasses] = useState([
+    { title: "VIEW ALL CLASSES", href: OUR_CLASSES },
+  ]);
 
-export const lecturers = [
-  {
-    title: "VIEW ALL LECTURERS",
-    href: OUR_LECTURERS,
-    description: "View all lecturers available on StudyReserve.",
-  },
-  {
-    title: "GCE Ordinary Level",
-    href: "",
-    description: "Lecturers related to grade 10 & grade 11 in Sri Lanka.",
-    disabled: true,
-  },
-  {
-    title: "GCE Advanced Level",
-    href: "",
-    description: "Lecturers related to grade 12 & grade 13 in Sri Lanka.",
-    disabled: true,
-  },
-  {
-    title: "Higher Education",
-    href: "",
-    description: "Lecturers related to undergraduate and postgraduate studies.",
-    disabled: true,
-  },
-];
+  const [lecturers, setLecturers] = useState([
+    { title: "VIEW ALL LECTURERS", href: OUR_LECTURERS },
+  ]);
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const response = await getAllTags();
+        const tags: TTag[] = response.data;
+
+        const classCategoryLinks = tags.map((tag) => ({
+          title: tag.title,
+          href: `${OUR_CLASSES}?category=${encodeURIComponent(tag.title)}`,
+        }));
+
+        const lecturerCategoryLinks = tags.map((tag) => ({
+          title: tag.title,
+          href: `${OUR_LECTURERS}?category=${encodeURIComponent(tag.title)}`,
+        }));
+
+        setClasses((prev) => [...prev, ...classCategoryLinks]);
+        setLecturers((prev) => [...prev, ...lecturerCategoryLinks]);
+      } catch (error) {
+        console.error("Failed to load tags:", error);
+      }
+    };
+
+    void fetchTags();
+  }, []);
+
+  return { classes, lecturers };
+};
 
 // TODO:
 // export const NAV_ITEMS = [

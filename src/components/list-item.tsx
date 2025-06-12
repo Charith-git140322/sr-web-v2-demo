@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { NavigationMenuLink, Link } from "@radix-ui/react-navigation-menu";
+import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
+import Link from "next/link";
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -31,7 +32,6 @@ ListItem.displayName = "ListItem";
 interface Item {
   title: string;
   href: string;
-  description?: string;
   disabled?: boolean;
 }
 
@@ -54,12 +54,9 @@ const NavigationList = ({ items }: NavigationListProps) => {
             onClick={(e) => item.disabled && e.preventDefault()}
             aria-disabled={item.disabled}
           >
-            <div className="text-sm font-medium leading-none">{item.title}</div>
-            {item.description && (
-              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                {item.description}
-              </p>
-            )}
+            <div className="text-sm font-medium leading-none md:text-base">
+              {item.title}
+            </div>
           </Link>
         </li>
       ))}

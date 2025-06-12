@@ -6,7 +6,7 @@ export const PRICING_PLANS = [
     price: 0,
     enrolments: "Up to 10",
     maxCourses: "1",
-    tableColor: "bg-gray-300",
+    tableColor: "bg-gray-200",
     storage: {
       youtube: true,
       googleDrive: false,
@@ -19,7 +19,7 @@ export const PRICING_PLANS = [
     price: 5750,
     enrolments: "Up to 150",
     maxCourses: "3",
-    tableColor: "bg-amber-300",
+    tableColor: "bg-amber-100",
     storage: {
       youtube: true,
       googleDrive: true,
@@ -32,7 +32,7 @@ export const PRICING_PLANS = [
     price: 11500,
     enrolments: "Up to 500",
     maxCourses: "5",
-    tableColor: "bg-amber-300",
+    tableColor: "bg-amber-100",
     storage: {
       youtube: true,
       googleDrive: true,
@@ -45,7 +45,7 @@ export const PRICING_PLANS = [
     price: 17000,
     enrolments: "Up to 1000",
     maxCourses: "10",
-    tableColor: "bg-amber-300",
+    tableColor: "bg-amber-100",
     storage: {
       youtube: true,
       googleDrive: true,

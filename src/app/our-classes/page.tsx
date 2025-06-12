@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { TCourse } from "@/lib/types";
 import { getAllCourses } from "@/services/service";
 import SearchBar from "@/components/search-bar";
-import CourseCard from "@/components/course-card";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function OurClasses() {
   const [courses, setCourses] = useState<TCourse[]>([]);
@@ -14,6 +14,52 @@ export default function OurClasses() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    const query = searchParams.get("search") ?? "";
+    let filters = searchParams.getAll("filter") ?? [];
+    const category = searchParams.get("category");
+
+    if (category && !filters.includes(category)) {
+      filters = [...filters, category];
+    }
+
+    setSearchQuery(query);
+    setSelectedFilters(filters);
+  }, [searchParams]);
+
+  const updateURLParams = (newSearch?: string, newFilters?: string[]) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (newSearch !== undefined) {
+      if (newSearch) {
+        params.set("search", newSearch);
+      } else {
+        params.delete("search");
+      }
+    }
+
+    if (newFilters !== undefined) {
+      params.delete("filter");
+      newFilters.forEach((filter) => params.append("filter", filter));
+      params.delete("category");
+    }
+
+    router.push(`/our-classes?${params.toString()}`);
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    updateURLParams(query, undefined);
+  };
+
+  const handleFiltersChange = (filters: string[]) => {
+    setSelectedFilters(filters);
+    updateURLParams(undefined, filters);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,9 +83,11 @@ export default function OurClasses() {
         course.tags.some((tag) =>
           tag.title.toLowerCase().includes(searchQuery.toLowerCase()),
         );
+
       const matchesFilters =
         selectedFilters.length === 0 ||
         course.tags.some((tag) => selectedFilters.includes(tag.title));
+
       return matchesSearch && matchesFilters;
     });
     setFilteredCourses(filtered);
@@ -62,8 +110,8 @@ export default function OurClasses() {
           <div className="mt-4">
             <SearchBar
               selectedFilters={selectedFilters}
-              onFiltersChange={setSelectedFilters}
-              onSearch={setSearchQuery}
+              onFiltersChange={handleFiltersChange}
+              onSearch={handleSearch}
             />
           </div>
         </div>
@@ -77,19 +125,11 @@ export default function OurClasses() {
           />
         </div>
       </section>
-      <section className="relative z-10 flex justify-center px-4 py-10 sm:px-8 md:px-12 lg:px-20">
-        {isLoading ? (
-          <div className="grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {Array.from({ length: 8 }).map((_, index) => (
-              <CourseCard key={index} isLoading={true} />
-            ))}
-          </div>
-        ) : (
-          <div className="flex w-full justify-center">
-            <CourseGrid courses={filteredCourses} />
-          </div>
-        )}
+
+      <section className="mx-auto flex max-w-7xl flex-col gap-2 px-4 text-justify md:text-lg">
+        <CourseGrid courses={filteredCourses} isLoading={isLoading} />
       </section>
+
       <div className="absolute bottom-0 left-0 w-full">
         <Image
           src="/images/vector-bottom.svg"

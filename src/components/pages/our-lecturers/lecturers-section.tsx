@@ -7,7 +7,17 @@ import { useEffect, useState } from "react";
 import { TTeacher } from "@/lib/types";
 import { IMAGE_BASE_URL } from "@/config/constants";
 
-const LecturersSection = ({ searchQuery }: { searchQuery: string }) => {
+type lecturersSectionProps = {
+  searchQuery: string;
+  selectedFilters: string[];
+  onCategoryChange: (filters: string[]) => void;
+};
+
+const LecturersSection = ({
+  searchQuery,
+  selectedFilters,
+  onCategoryChange,
+}: lecturersSectionProps) => {
   const [lecturers, setLecturers] = useState<TTeacher[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filteredLecturers, setFilteredLecturers] = useState<TTeacher[]>([]);
@@ -28,16 +38,29 @@ const LecturersSection = ({ searchQuery }: { searchQuery: string }) => {
   }, []);
 
   useEffect(() => {
-    const filtered = lecturers.filter(
-      (lecturer) =>
+    const filtered = lecturers.filter((lecturer) => {
+      const matchesSearch =
         lecturer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         lecturer.teachingMedium
           ?.toLowerCase()
           .includes(searchQuery.toLowerCase()) ||
-        lecturer.country?.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
+        lecturer.country?.toLowerCase().includes(searchQuery.toLowerCase());
+
+      const matchesFilters =
+        selectedFilters.length === 0 ||
+        lecturer.courses?.some((course) =>
+          course.tags?.some((tag) =>
+            selectedFilters
+              .map((filter) => filter.toLowerCase())
+              .includes(tag.title.toLowerCase()),
+          ),
+        );
+
+      return matchesSearch && matchesFilters;
+    });
     setFilteredLecturers(filtered);
-  }, [searchQuery, lecturers]);
+    onCategoryChange(selectedFilters);
+  }, [searchQuery, selectedFilters, lecturers, onCategoryChange]);
 
   return (
     <section>
@@ -49,7 +72,7 @@ const LecturersSection = ({ searchQuery }: { searchQuery: string }) => {
             ))}
           </>
         ) : filteredLecturers.length === 0 ? (
-          <div className="col-span-full flex h-[300px] w-full items-center justify-center text-lg text-gray-600">
+          <div className="col-span-full flex h-[300px] w-full items-center justify-center text-lg italic text-gray-600">
             Nothing found... <br />
             You might want to check your spelling or try different words
           </div>

@@ -2,7 +2,7 @@ import InfoPageWrapper from "@/components/info-page-wrapper";
 import {
   PageSubHeader,
   PageSubSectionTitle,
-} from "@/components/page-sub-header";
+} from "@/components/pages/about-us/page-sub-header";
 import { SUB_SECTIONS } from "@/data/about-us-data";
 
 export default function AboutUs() {

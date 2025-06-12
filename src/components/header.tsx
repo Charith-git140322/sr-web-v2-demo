@@ -5,7 +5,7 @@ import Link from "next/link";
 import { cn, scrollToDashboard } from "@/lib/utils";
 import { LayoutGrid, CircleX, CircleChevronDown } from "lucide-react";
 import NavigationList from "./list-item";
-import { classes, lecturers } from "@/config/main-nav-dropdowns";
+import { useTagLinks } from "@/config/main-nav-dropdowns";
 import {
   NavigationMenuLink,
   NavigationMenu,
@@ -22,6 +22,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [classesOpen, setClassesOpen] = React.useState(false);
   const [lecturersOpen, setLecturersOpen] = React.useState(false);
+  const { classes, lecturers } = useTagLinks();
 
   const scrollOrNavigateToDashboard = (e: React.MouseEvent) => {
     if (window.location.pathname !== "/") {

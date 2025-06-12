@@ -3,10 +3,58 @@
 import LecturersSection from "@/components/pages/our-lecturers/lecturers-section";
 import Image from "next/image";
 import SearchBar from "@/components/search-bar";
-import { useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function OurLecturers() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+
+  useEffect(() => {
+    const query = searchParams.get("search") ?? "";
+    const cat = searchParams.get("category") ?? "";
+    let filters = searchParams.getAll("filter") ?? [];
+
+    if (cat && !filters.includes(cat)) {
+      filters = [...filters, cat];
+    }
+
+    setSearchQuery(query);
+    setSelectedFilters(filters);
+  }, [searchParams]);
+
+  const updateURLParams = (newSearch?: string, newFilters?: string[]) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (newSearch !== undefined) {
+      if (newSearch) {
+        params.set("search", newSearch);
+      } else {
+        params.delete("search");
+      }
+    }
+
+    if (newFilters !== undefined) {
+      params.delete("filter");
+      newFilters.forEach((filter) => params.append("filter", filter));
+      params.delete("category");
+    }
+
+    router.push(`/our-lecturers?${params.toString()}`);
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    updateURLParams(query, undefined);
+  };
+
+  const handleFiltersChange = (filters: string[]) => {
+    setSelectedFilters(filters);
+    updateURLParams(undefined, filters);
+  };
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-r from-white to-[#f5e8da]">
@@ -23,7 +71,11 @@ export default function OurLecturers() {
             Our Lecturers
           </h1>
           <div className="mt-4">
-            <SearchBar onSearch={setSearchQuery} />
+            <SearchBar
+              onSearch={handleSearch}
+              onFiltersChange={handleFiltersChange}
+              selectedFilters={selectedFilters}
+            />
           </div>
         </div>
         <div className="absolute -bottom-1 left-0 w-full md:-bottom-2 xl:-bottom-4">
@@ -46,7 +98,11 @@ export default function OurLecturers() {
           />
         </div>
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-y-4 py-4">
-          <LecturersSection searchQuery={searchQuery} />
+          <LecturersSection
+            searchQuery={searchQuery}
+            selectedFilters={selectedFilters}
+            onCategoryChange={handleFiltersChange}
+          />
         </div>
       </section>
     </div>

@@ -3,8 +3,8 @@ import Image from "next/image";
 import FilterIcon from "../../public/icons/filter.svg";
 import SearchIcon from "../../public/icons/search.svg";
 import CheckIcon from "../../public/icons/check.svg";
-
-const educationLevels = ["Advanced", "GCE A/L", "GCE O/L"];
+import { getAllTags } from "@/services/service";
+import { TTag } from "@/lib/types";
 
 type SearchBarProps = {
   selectedFilters?: string[];
@@ -12,18 +12,36 @@ type SearchBarProps = {
   onSearch?: (query: string) => void;
   disableFilter?: boolean;
 };
+
 export default function SearchBar({
   disableFilter,
   selectedFilters,
   onFiltersChange,
   onSearch,
 }: SearchBarProps) {
+  const [tagOptions, setTagOptions] = useState<{ title: string }[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [localSelectedFilters, setLocalSelectedFilters] = useState<string[]>(
     selectedFilters ?? [],
   );
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const response = await getAllTags();
+        const tags: TTag[] = response.data;
+
+        const formatted = tags.map((tag) => ({ title: tag.title }));
+        setTagOptions(formatted);
+      } catch (error) {
+        console.error("Error fetching tags:", error);
+      }
+    };
+
+    void fetchTags();
+  }, []);
 
   useEffect(() => {
     if (selectedFilters) {
@@ -104,13 +122,13 @@ export default function SearchBar({
                 : "pointer-events-none scale-y-0 opacity-0"
             }`}
           >
-            {educationLevels.map((level) => (
+            {tagOptions?.map((tag) => (
               <button
-                key={level}
+                key={tag.title}
                 onClick={() => {
-                  const newFilters = localSelectedFilters.includes(level)
-                    ? localSelectedFilters.filter((f) => f !== level)
-                    : [...localSelectedFilters, level];
+                  const newFilters = localSelectedFilters.includes(tag.title)
+                    ? localSelectedFilters.filter((f) => f !== tag.title)
+                    : [...localSelectedFilters, tag.title];
 
                   setLocalSelectedFilters(newFilters);
                   if (onFiltersChange) {
@@ -118,13 +136,13 @@ export default function SearchBar({
                   }
                 }}
                 className={`flex w-full items-center gap-2 px-4 py-2 text-left hover:bg-gray-100 ${
-                  localSelectedFilters.includes(level)
+                  localSelectedFilters.includes(tag.title)
                     ? "bg-gray-50 font-medium"
                     : ""
                 }`}
               >
                 <div className="flex h-4 w-4 items-center justify-center rounded border border-gray-300 bg-white">
-                  {localSelectedFilters.includes(level) && (
+                  {localSelectedFilters.includes(tag.title) && (
                     <Image
                       src={CheckIcon as string}
                       alt="Selected"
@@ -134,7 +152,7 @@ export default function SearchBar({
                     />
                   )}
                 </div>
-                {level}
+                {tag.title}
               </button>
             ))}
           </div>

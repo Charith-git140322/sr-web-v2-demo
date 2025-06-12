@@ -1,4 +1,4 @@
-import { PageSubHeader } from "@/components/page-sub-header";
+import { PageSubHeader } from "@/components/pages/about-us/page-sub-header";
 import InfoPageWrapper from "@/components/info-page-wrapper";
 export default function PrivacyPolicy() {
   return (

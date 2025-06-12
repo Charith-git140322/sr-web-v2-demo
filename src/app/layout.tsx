@@ -5,6 +5,8 @@ import { Header } from "@/components/header";
 import Footer from "@/components/footer";
 import { LenisProvider } from "@/components/lenis-provider";
 import PageTransition from "@/components/page-transition";
+import { SocialSidebar } from "@/components/pages/home/social-side-bar";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "StudyReserve",
@@ -22,8 +24,12 @@ export default function RootLayout({
       <body className="flex h-full min-h-screen w-full flex-col justify-between">
         <LenisProvider>
           <Header />
+          <SocialSidebar />
           <main>
-            <PageTransition>{children}</PageTransition>
+            <PageTransition>
+              {/*TODO: Remove suspense from here */}
+              <Suspense fallback={null}>{children}</Suspense>
+            </PageTransition>
           </main>
           <Footer />
         </LenisProvider>

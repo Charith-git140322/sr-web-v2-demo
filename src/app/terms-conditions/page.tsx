@@ -1,5 +1,5 @@
 import InfoPageWrapper from "@/components/info-page-wrapper";
-import { PageSubHeader } from "@/components/page-sub-header";
+import { PageSubHeader } from "@/components/pages/about-us/page-sub-header";
 
 export default function TermsConditions() {
   return (

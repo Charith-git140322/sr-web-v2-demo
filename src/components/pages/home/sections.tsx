@@ -1,6 +1,5 @@
 import { FilledButton } from "@/components/buttons";
 import CoursesBar from "@/components/pages/home/courses-bar";
-import { SocialBar } from "@/components/pages/home/social-bar";
 import { DASHBOARD_SECTION_ID } from "@/config/constants";
 import { OUR_CLASSES } from "@/config/routes";
 import { TCourse } from "@/lib/types";
@@ -11,20 +10,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const HeroSection = ({}) => {
+export const HeroSection = () => {
   return (
-    <section className="relative w-full">
-      <div className="absolute inset-0 -z-10 h-[95vh] w-full">
-        <Image
-          src="/images/hero-bg.svg"
-          alt="Hero Section Background"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
+    <section className="relative flex min-h-[95vh] w-full">
+      <Image
+        src="/images/hero-bg.svg"
+        alt="Hero Section Background"
+        fill
+        className="-z-10 object-cover"
+        priority
+      />
       <div className="mx-auto flex w-full max-w-7xl px-4">
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col items-start justify-center px-10 md:px-2">
           <h1 className="text-3xl font-bold tracking-tight md:text-6xl">
             StudyReserve
           </h1>
@@ -36,9 +33,6 @@ export const HeroSection = ({}) => {
               <FilledButton>Register Now!</FilledButton>
             </Link>
           </div>
-        </div>
-        <div className="ml-auto flex h-[95vh] items-end">
-          <SocialBar />
         </div>
       </div>
     </section>

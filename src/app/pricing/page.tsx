@@ -1,7 +1,9 @@
 import { PRICING_PLANS, ADD_ONS } from "@/data/pricing-plans";
-import PricingCard, { EnterprisePricingCard } from "@/components/pricing-card";
-import FeatureComparisonTable from "@/components/feature-comparison-table";
-import AddOnCard from "@/components/add-on-card";
+import PricingCard, {
+  EnterprisePricingCard,
+} from "@/components/pages/pricing/pricing-card";
+import FeatureComparisonTable from "@/components/pages/pricing/feature-comparison-table";
+import AddOnCard from "@/components/pages/pricing/add-on-card";
 import InfoPageWrapper from "@/components/info-page-wrapper";
 
 export default function Pricing() {

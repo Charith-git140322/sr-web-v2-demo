@@ -10,13 +10,11 @@ import { IMAGE_BASE_URL } from "@/config/constants";
 type lecturersSectionProps = {
   searchQuery: string;
   selectedFilters: string[];
-  onCategoryChange: (filters: string[]) => void;
 };
 
 const LecturersSection = ({
   searchQuery,
   selectedFilters,
-  onCategoryChange,
 }: lecturersSectionProps) => {
   const [lecturers, setLecturers] = useState<TTeacher[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -59,8 +57,7 @@ const LecturersSection = ({
       return matchesSearch && matchesFilters;
     });
     setFilteredLecturers(filtered);
-    onCategoryChange(selectedFilters);
-  }, [searchQuery, selectedFilters, lecturers, onCategoryChange]);
+  }, [searchQuery, selectedFilters, lecturers]);
 
   return (
     <section>
@@ -82,11 +79,15 @@ const LecturersSection = ({
               key={lecturer.id}
               keyValue={lecturer.id}
               name={lecturer.name}
-              country={lecturer.country ?? "N/A"}
-              language={lecturer.teachingMedium ?? "N/A"}
+              country={lecturer.country?.trim() ? lecturer.country : "N/A"}
+              language={
+                lecturer.teachingMedium?.trim()
+                  ? lecturer.teachingMedium
+                  : "N/A"
+              }
               image={
-                lecturer.coverImageS3ObjectKey
-                  ? `${IMAGE_BASE_URL}/${lecturer.coverImageS3ObjectKey}`
+                lecturer.profileImageS3ObjectKey
+                  ? `${IMAGE_BASE_URL}/${lecturer.profileImageS3ObjectKey}`
                   : "/images/default-avatar.png"
               }
             />

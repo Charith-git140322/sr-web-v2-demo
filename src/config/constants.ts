@@ -3,7 +3,7 @@ export const API_BASE_URL_PRODUCTION = "https://api.studyreserve.com";
 export const API_BASE_URL_DEVELOPMENT = "http://localhost:8085";
 
 export const API_BASE_URL =
-  process.env.NODE_ENV !== "development"
+  process.env.NODE_ENV === "development"
     ? API_BASE_URL_DEVELOPMENT
     : API_BASE_URL_PRODUCTION;
 

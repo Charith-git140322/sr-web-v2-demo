@@ -57,25 +57,29 @@ export default function LecturerProfile() {
   return (
     <div className="relative">
       <Image
-        src="/default-cover-background.webp"
-        alt="beautiful-nature-scenery-photo"
+        src={
+          lecturer.coverImageS3ObjectKey
+            ? `${IMAGE_BASE_URL}/${lecturer.coverImageS3ObjectKey}`
+            : "/elementor-placeholder-image.svg"
+        }
+        alt={`${lecturer.name}-cover-photo`}
         width={1000}
         height={1000}
-        className="h-[250px] w-full rounded-lg object-cover md:h-[300px]"
+        className="h-[200px] w-full rounded-lg object-cover md:h-[250px]"
       />
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-8 px-4 md:flex-row">
           <div className="relative z-10 -mt-20">
             <Image
               src={
-                lecturer?.coverImageS3ObjectKey
-                  ? `${IMAGE_BASE_URL}/${lecturer.coverImageS3ObjectKey}`
+                lecturer.profileImageS3ObjectKey
+                  ? `${IMAGE_BASE_URL}/${lecturer.profileImageS3ObjectKey}`
                   : "/images/default-avatar.png"
               }
               alt={lecturer.name}
               width={300}
               height={300}
-              className="h-[200px] w-[200px] rounded-full border-2 bg-white md:h-[300px] md:w-[300px]"
+              className="h-[150px] w-[150px] rounded-full border-4 border-white bg-white md:h-[200px] md:w-[200px]"
             />
           </div>
           <div className="group flex flex-col gap-2 p-2">
@@ -87,13 +91,15 @@ export default function LecturerProfile() {
             <div className="flex flex-row items-center gap-2">
               <Earth size="22px" />
               <h3 className={!lecturer.country ? "italic" : ""}>
-                {lecturer.country ?? "N/A"}
+                {lecturer.country?.trim() ? lecturer.country : "N/A"}
               </h3>
             </div>
             <div className="flex flex-row items-center gap-2">
               <Globe size="22px" />
               <h3 className={!lecturer.teachingMedium ? "italic" : ""}>
-                {lecturer.teachingMedium ?? "N/A"}
+                {lecturer.teachingMedium?.trim()
+                  ? lecturer.teachingMedium
+                  : "N/A"}
               </h3>
             </div>
           </div>
@@ -104,19 +110,26 @@ export default function LecturerProfile() {
             <p
               className={`px-4 text-lg ${!lecturer.description ? "italic" : ""}`}
             >
-              {lecturer.description ??
-                `"This lecturer has not shared a profile description yet, but their expertise is reflected in the courses they offer."`}
+              {lecturer.description?.trim()
+                ? lecturer.description.trim()
+                : `"This lecturer has not shared a profile description yet, but their expertise is reflected in the courses they offer."`}
             </p>
           </div>
           <div className="flex max-h-[342px] flex-col gap-4 md:w-3/5">
             <h3 className="text-3xl font-semibold">Available Courses</h3>
             <div
               data-lenis-prevent
-              className="flex flex-col gap-4 overflow-auto px-4"
+              className="flex flex-col gap-4 overflow-auto border-r-4 border-gray-200 px-4"
             >
-              {lecturer.courses?.map((course) => (
-                <AvailableCoursesCard key={course.id} course={course} />
-              ))}
+              {lecturer.courses && lecturer.courses.length > 0 ? (
+                lecturer.courses.map((course) => (
+                  <AvailableCoursesCard key={course.id} course={course} />
+                ))
+              ) : (
+                <p className="italic text-gray-500">
+                  No courses available for this lecturer.
+                </p>
+              )}
             </div>
           </div>
         </div>

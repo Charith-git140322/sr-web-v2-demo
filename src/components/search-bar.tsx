@@ -103,7 +103,7 @@ export default function SearchBar({
             disabled={disableFilter}
           >
             {localSelectedFilters.length > 0 && (
-              <span className="absolute right-0 top-0 h-2 w-2 rounded-full bg-red-500"></span>
+              <span className="absolute right-6 top-1 h-2 w-2 rounded-full bg-red-500"></span>
             )}
             <span className="text-m text-white">Filter</span>
             <Image

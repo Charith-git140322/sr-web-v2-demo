@@ -101,7 +101,6 @@ export default function OurLecturers() {
           <LecturersSection
             searchQuery={searchQuery}
             selectedFilters={selectedFilters}
-            onCategoryChange={handleFiltersChange}
           />
         </div>
       </section>

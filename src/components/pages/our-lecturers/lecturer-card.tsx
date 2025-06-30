@@ -26,7 +26,7 @@ const LecturerCard = ({
           alt="Profile image"
           width={100}
           height={100}
-          className="rounded-full border"
+          className="h-[100px] w-[100px] rounded-full border object-cover"
         />
         <div
           className="line-clamp-2 overflow-hidden text-ellipsis break-words text-left text-lg font-semibold"

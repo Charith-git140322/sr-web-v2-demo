@@ -7,9 +7,9 @@ type PageSubSectionTitleProps = {
 };
 
 export function PageSubHeader({ children }: PageSubHeaderProps) {
-  return <h2 className="text-lg font-bold">{children}</h2>;
+  return <h2 className="pl-2 text-lg font-bold italic">{children}</h2>;
 }
 
 export function PageSubSectionTitle({ children }: PageSubSectionTitleProps) {
-  return <h3 className="text-md font-semibold">{children}</h3>;
+  return <h3 className="text-md pl-4 font-semibold italic">{children}</h3>;
 }
